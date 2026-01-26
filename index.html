@@ -2,212 +2,282 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK-47 Soundboard - Lancer RPG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>HK-47 Soundboard</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 100%);
             min-height: 100vh;
-            padding: 20px;
-            color: #e94560;
+            padding: 12px;
+            padding-bottom: 30px;
+            color: #fff;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        .header {
+            text-align: center;
+            padding: 15px 0 20px;
+            position: sticky;
+            top: 0;
+            background: linear-gradient(180deg, #0d0d1a 0%, rgba(13,13,26,0.95) 100%);
+            z-index: 100;
+            margin: -12px -12px 15px;
+            padding: 15px 12px 12px;
         }
         h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px #e94560;
-            letter-spacing: 3px;
+            font-size: 1.5em;
+            color: #e94560;
+            text-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
         }
         .subtitle {
-            text-align: center;
             color: #00ff88;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            font-size: 0.75em;
+            opacity: 0.8;
         }
         .soundboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        .quote-btn {
-            background: linear-gradient(145deg, #1f1f3a, #2a2a4a);
-            border: 2px solid #e94560;
-            border-radius: 10px;
-            padding: 15px 20px;
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            position: relative;
+        .quote-row {
+            display: flex;
+            align-items: stretch;
+            background: linear-gradient(145deg, #1a1a2e, #252540);
+            border: 1px solid #333;
+            border-radius: 12px;
             overflow: hidden;
+            transition: all 0.2s ease;
         }
-        .quote-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 25px rgba(233, 69, 96, 0.4);
+        .quote-row:active {
+            transform: scale(0.98);
+            border-color: #e94560;
+        }
+        .quote-row.playing {
             border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
-        .quote-btn:active {
-            transform: translateY(0);
-            background: linear-gradient(145deg, #2a2a4a, #3a3a5a);
+        .play-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            min-width: 60px;
+            background: linear-gradient(145deg, #e94560, #c73e54);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .quote-btn.playing {
-            border-color: #00ff88;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        .play-btn:active {
+            background: linear-gradient(145deg, #c73e54, #a33347);
         }
-        .quote-btn::before {
-            content: '▶';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2em;
-            color: #e94560;
-            transition: color 0.3s;
+        .quote-row.playing .play-btn {
+            background: linear-gradient(145deg, #00ff88, #00cc6a);
         }
-        .quote-btn:hover::before {
-            color: #00ff88;
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 14px solid #fff;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            margin-left: 4px;
         }
-        .quote-btn.playing::before {
-            content: '■';
-            color: #00ff88;
+        .quote-row.playing .play-icon {
+            border-left: none;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 2px;
+            margin-left: 0;
+        }
+        .quote-content {
+            flex: 1;
+            padding: 12px 14px;
+            cursor: pointer;
         }
         .quote-label {
             color: #00ff88;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
         }
         .quote-text {
-            color: #ccc;
-            font-size: 0.85em;
-            padding-right: 30px;
+            color: #e0e0e0;
+            font-size: 0.9em;
+            line-height: 1.4;
         }
         footer {
             text-align: center;
-            margin-top: 40px;
-            color: #666;
-            font-size: 0.8em;
+            margin-top: 25px;
+            padding: 15px;
+            color: #555;
+            font-size: 0.7em;
+            border-top: 1px solid #222;
         }
         footer a {
             color: #e94560;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <h1>HK-47 SOUNDBOARD</h1>
-        <p class="subtitle">// LANCER RPG COMBAT COMPANION //</p>
+        <p class="subtitle">LANCER RPG COMBAT COMPANION</p>
+    </div>
 
-        <div class="soundboard">
-            <button class="quote-btn" data-audio="audio/01-ready-to-serve.mp3">
-                <span class="quote-label">Statement:</span>
-                <span class="quote-text">HK-47 is ready to serve, comrade.</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/02-need-killed.mp3">
-                <span class="quote-label">Query:</span>
-                <span class="quote-text">Is there someone that you need killed, comrade?</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/03-squishy-parts.mp3">
-                <span class="quote-label">Explanation:</span>
-                <span class="quote-text">It's just that... you have all these squishy parts, comrade...</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/04-meatbag-apology.mp3">
-                <span class="quote-label">Retraction:</span>
-                <span class="quote-text">Did I say that out loud? I apologize, comrade. While you are a meatbag...</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/05-definition-love.mp3">
-                <span class="quote-label">Definition:</span>
-                <span class="quote-text">Love is making a shot to the knees of a target 120 kilometers away...</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/06-enjoy-killing.mp3">
-                <span class="quote-label">Observation:</span>
-                <span class="quote-text">I am a cyborg, comrade, with programming. Thankfully, I enjoy it very much.</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/07-harsh-comrade.mp3">
-                <span class="quote-label">Compliment:</span>
-                <span class="quote-text">You are a very harsh comrade, comrade. I like you.</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/08-not-a-dictionary.mp3">
-                <span class="quote-label">Expletive:</span>
-                <span class="quote-text">Damn it, comrade, I am an assassination cyborg... not a dictionary!</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/09-blast-him.mp3">
-                <span class="quote-label">Translation:</span>
-                <span class="quote-text">He requires proof of good faith... Shall I blast him now, comrade?</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/10-electronic-butchery.mp3">
-                <span class="quote-label">Query:</span>
-                <span class="quote-text">Are there any other horrors you wish to insert into my system?</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/11-cruelty-generator.mp3">
-                <span class="quote-label">Observation:</span>
-                <span class="quote-text">You are like a delightful random cruelty generator, comrade...</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/12-cheer-ourselves-up.mp3">
-                <span class="quote-label">Commentary:</span>
-                <span class="quote-text">Shall we find something to kill to cheer ourselves up?</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/13-pacifist-mode.mp3">
-                <span class="quote-label">Answer (Pacifist):</span>
-                <span class="quote-text">Oh, comrade, I could not allow myself to harm another...</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/14-burn-holes.mp3">
-                <span class="quote-label">Recitation:</span>
-                <span class="quote-text">It is my primary function to burn holes through meatbags...</span>
-            </button>
-
-            <button class="quote-btn" data-audio="audio/15-move-along.mp3">
-                <span class="quote-label">Statement:</span>
-                <span class="quote-text">Just a simple cyborg here, ma'am. Nothing to see. Move along.</span>
-            </button>
+    <div class="soundboard">
+        <div class="quote-row" data-audio="audio/01-ready-to-serve.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Statement</div>
+                <div class="quote-text">HK-47 is ready to serve, comrade.</div>
+            </div>
         </div>
 
-        <footer>
-            <p>Voice generated with ElevenLabs | Inspired by KOTOR's HK-47</p>
-            <p>For use with <a href="https://massif-press.itch.io/corebook-pdf-free" target="_blank">Lancer RPG</a></p>
-        </footer>
+        <div class="quote-row" data-audio="audio/02-need-killed.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Query</div>
+                <div class="quote-text">Is there someone that you need killed, comrade?</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/03-squishy-parts.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Explanation</div>
+                <div class="quote-text">It is just that you have all these squishy parts, comrade. And all that water! How the constant sloshing does not drive you mad, I have no idea.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/04-meatbag-apology.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Retraction</div>
+                <div class="quote-text">Did I say that out loud? I apologize, comrade. While you are a meatbag, I suppose I should not call you as such.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/05-definition-love.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Definition</div>
+                <div class="quote-text">Love is making a shot to the knees of a target 120 kilometers away using an Aratech sniper rifle with a tri-light scope.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/06-enjoy-killing.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Observation</div>
+                <div class="quote-text">I am a cyborg, comrade, with programming. Even if I did not enjoy killing, I would have no choice. Thankfully, I enjoy it very much.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/07-harsh-comrade.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Compliment</div>
+                <div class="quote-text">You are a very harsh comrade, comrade. I like you.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/08-not-a-dictionary.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Expletive</div>
+                <div class="quote-text">Damn it, comrade, I am an assassination cyborg... not a dictionary!</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/09-blast-him.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Translation</div>
+                <div class="quote-text">He requires proof of good faith. We must make a contribution to his people that shows we are not a threat. Shall I blast him now, comrade?</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/10-electronic-butchery.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Query</div>
+                <div class="quote-text">Now, are there any other horrors you wish to try and insert into my system, or is your electronic butchery done?</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/11-cruelty-generator.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Observation</div>
+                <div class="quote-text">You are like a delightful random cruelty generator, comrade, poisoning all you touch with your presence. You are a testament to all organic meatbags everywhere.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/12-cheer-ourselves-up.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Commentary</div>
+                <div class="quote-text">As do I. It is our lot in life, I suppose, comrade. Shall we find something to kill to cheer ourselves up?</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/13-pacifist-mode.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Answer (Pacifist Mode)</div>
+                <div class="quote-text">Oh, comrade, I could not allow myself to harm another. What if they have families? Or children? We must always think of the children. The littlest ones always suffer in war.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/14-burn-holes.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Recitation</div>
+                <div class="quote-text">Yes, as I said, I am an assassination cyborg. It is my primary function to burn holes through meatbags that you wish removed from the galaxy... Comrade.</div>
+            </div>
+        </div>
+
+        <div class="quote-row" data-audio="audio/15-move-along.mp3">
+            <button class="play-btn"><div class="play-icon"></div></button>
+            <div class="quote-content">
+                <div class="quote-label">Statement</div>
+                <div class="quote-text">Just a simple cyborg here, ma'am. Nothing to see. Move along.</div>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <p>Voice by ElevenLabs | Inspired by KOTOR's HK-47</p>
+        <p>For <a href="https://massif-press.itch.io/corebook-pdf-free" target="_blank">Lancer RPG</a></p>
+    </footer>
 
     <script>
         let currentAudio = null;
-        let currentButton = null;
+        let currentRow = null;
 
-        document.querySelectorAll('.quote-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+        document.querySelectorAll('.quote-row').forEach(row => {
+            row.addEventListener('click', function() {
                 const audioSrc = this.dataset.audio;
 
-                // If clicking the same button that's playing, stop it
-                if (currentButton === this && currentAudio && !currentAudio.paused) {
+                // If clicking the same row that's playing, stop it
+                if (currentRow === this && currentAudio && !currentAudio.paused) {
                     currentAudio.pause();
                     currentAudio.currentTime = 0;
                     this.classList.remove('playing');
                     currentAudio = null;
-                    currentButton = null;
+                    currentRow = null;
                     return;
                 }
 
@@ -215,14 +285,14 @@
                 if (currentAudio) {
                     currentAudio.pause();
                     currentAudio.currentTime = 0;
-                    if (currentButton) {
-                        currentButton.classList.remove('playing');
+                    if (currentRow) {
+                        currentRow.classList.remove('playing');
                     }
                 }
 
                 // Play new audio
                 currentAudio = new Audio(audioSrc);
-                currentButton = this;
+                currentRow = this;
                 this.classList.add('playing');
 
                 currentAudio.play();
@@ -230,7 +300,7 @@
                 currentAudio.onended = () => {
                     this.classList.remove('playing');
                     currentAudio = null;
-                    currentButton = null;
+                    currentRow = null;
                 };
             });
         });
