@@ -28,3 +28,18 @@ Statement: I am programmed to terminate threats to my comrade. You should be gra
 Clarification: Assassination is my primary function. I also possess excellent hearing.
 Statement: I'm looking forward to killing something. I do hope it's not you. That would be disappointing.
 Observation: I have killed many, many meatbags in my time. I had thought I had seen the last potential aspect of organic cruelty, but you continue to surprise me, comrade.
+Statement: I am the law.
+Declaration: Ma-Ma is not the law. I am the law. She is a common criminal, guilty of murder, and as of now under sentence of death.
+Announcement: Negotiation is over. Sentence is death.
+Observation: Emotions. There ought to be a law against them.
+Warning: You betrayed the law, comrade. That is unforgivable.
+Statement: Court is adjourned.
+Clarification: I cannot execute a target on ninety-nine percent certainty. It would save me considerable processing time if you simply confessed now.
+Observation: Democracy is a cancer eating away at the heart of society. The law is the only cure.
+Statement: No women. No children. That is the rule.
+Explanation: The rifle is the first weapon you learn to use, because it lets you keep your distance from the target. The closer you get to being a professional, the closer you can get to the target. The knife is the last thing you learn.
+Query: Is existence always this difficult? Answer: Always like this.
+Observation: I take no pleasure in terminating a meatbag's existence. But I am exceedingly proficient at it.
+Statement: I do not lose targets, comrade. They go down before they even know they were in a fight.
+Observation: I enjoy these calm moments before the engagement. It reminds me of optimal combat conditions.
+Clarification: My operational cycle is like a cleaning unit's work. It is never finished.
