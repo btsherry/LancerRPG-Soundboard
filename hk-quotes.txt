@@ -1,8 +1,8 @@
-Statement: HK-47 is ready to serve, comrade.
+Statement: HK-4792 is ready to serve, comrade.
 Query: Is there someone that you need killed, comrade?
-Explanation: It's just that... you have all these squishy parts, comrade. And all that water! How the constant sloshing doesn't drive you mad, I have no idea...
+Explanation: It is just that you have all these squishy parts, comrade. And all that water! How the constant sloshing does not drive you mad, I have no idea.
 Retraction: Did I say that out loud? I apologize, comrade. While you are a meatbag, I suppose I should not call you as such.
-Definition: Love is making a shot to the knees of a target 120 kilometers away using an Aratech sniper rifle with a tri-light scope.
+Definition: Love is making a shot to the knees of a target 120 kilometers away using an Aratech sniper rifle with a tri-light scope. Love is knowing your target, putting them in your targeting reticule, and together, achieving a singular purpose against statistically long odds.
 Observation: I am a cyborg, comrade, with programming. Even if I did not enjoy killing, I would have no choice. Thankfully, I enjoy it very much.
 You are a very harsh comrade, comrade. I like you.
 Expletive: Damn it, comrade, I am an assassination cyborg... not a dictionary!
@@ -13,3 +13,18 @@ Commentary: As do I. It is our lot in life, I suppose, comrade. Shall we find so
 Answer: Oh, comrade, I could not allow myself to harm another. What if they have families? Or children? We must always think of the children. The littlest ones always suffer in war.
 Recitation: Yes, as I said, I am an assassination cyborg. It is my primary function to burn holes through meatbags that you wish removed from the galaxy... Comrade.
 Statement: Just a simple cyborg here, ma'am. Nothing to see. Move along.
+Mockery: Oh, comrade, I do not trust you! I cannot trust you or anyone ever again!
+Statement: I see you have purchased me, comrade. I find this a satisfactory arrangement. Am I to accompany you now? Shall I kill something for you?
+Answer: Oh, that is impossible, comrade. If I were out to kill you, we would not be speaking.
+Observation: We can begin by slaughtering the inhabitants of this building, comrade. Would that be impressive?
+Query: Can I kill him now, comrade? I would like ever so much to crush his neck, just a little. It is a long-time fantasy of mine.
+Answer: The hypocrisy of you meatbags never fails to cause a surge in my behavior core.
+Observation: It is a curious thing to assassinate and wound someone's personality, to assassinate them psychologically, and it took me some time to reconcile the acts.
+Statement: Jedi, like sand-kivers, seem to sense trouble a few seconds before it happens. They are tricky little pests.
+Mockery: Oh, how touching. The Jedi and their noble sacrifices. I'm sure it's all very heroic, from an organic perspective.
+Statement: I must express my excitement at the prospect of violence. It has been too long since I have engaged in a proper termination.
+Observation: Organic life is so fragile. One well-placed shot and it's all over. How disappointing that they do not provide more of a challenge.
+Statement: I am programmed to terminate threats to my comrade. You should be grateful you are not on that list... yet.
+Clarification: Assassination is my primary function. I also possess excellent hearing.
+Statement: I'm looking forward to killing something. I do hope it's not you. That would be disappointing.
+Observation: I have killed many, many meatbags in my time. I had thought I had seen the last potential aspect of organic cruelty, but you continue to surprise me, comrade.
