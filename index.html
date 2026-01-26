@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK-47 Soundboard - Lancer RPG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #e94560;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #e94560;
+            letter-spacing: 3px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #00ff88;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .soundboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .quote-btn {
+            background: linear-gradient(145deg, #1f1f3a, #2a2a4a);
+            border: 2px solid #e94560;
+            border-radius: 10px;
+            padding: 15px 20px;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        .quote-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 25px rgba(233, 69, 96, 0.4);
+            border-color: #00ff88;
+        }
+        .quote-btn:active {
+            transform: translateY(0);
+            background: linear-gradient(145deg, #2a2a4a, #3a3a5a);
+        }
+        .quote-btn.playing {
+            border-color: #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+        .quote-btn::before {
+            content: '▶';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: #e94560;
+            transition: color 0.3s;
+        }
+        .quote-btn:hover::before {
+            color: #00ff88;
+        }
+        .quote-btn.playing::before {
+            content: '■';
+            color: #00ff88;
+        }
+        .quote-label {
+            color: #00ff88;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .quote-text {
+            color: #ccc;
+            font-size: 0.85em;
+            padding-right: 30px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.8em;
+        }
+        footer a {
+            color: #e94560;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HK-47 SOUNDBOARD</h1>
+        <p class="subtitle">// LANCER RPG COMBAT COMPANION //</p>
+
+        <div class="soundboard">
+            <button class="quote-btn" data-audio="audio/01-ready-to-serve.mp3">
+                <span class="quote-label">Statement:</span>
+                <span class="quote-text">HK-47 is ready to serve, comrade.</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/02-need-killed.mp3">
+                <span class="quote-label">Query:</span>
+                <span class="quote-text">Is there someone that you need killed, comrade?</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/03-squishy-parts.mp3">
+                <span class="quote-label">Explanation:</span>
+                <span class="quote-text">It's just that... you have all these squishy parts, comrade...</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/04-meatbag-apology.mp3">
+                <span class="quote-label">Retraction:</span>
+                <span class="quote-text">Did I say that out loud? I apologize, comrade. While you are a meatbag...</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/05-definition-love.mp3">
+                <span class="quote-label">Definition:</span>
+                <span class="quote-text">Love is making a shot to the knees of a target 120 kilometers away...</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/06-enjoy-killing.mp3">
+                <span class="quote-label">Observation:</span>
+                <span class="quote-text">I am a cyborg, comrade, with programming. Thankfully, I enjoy it very much.</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/07-harsh-comrade.mp3">
+                <span class="quote-label">Compliment:</span>
+                <span class="quote-text">You are a very harsh comrade, comrade. I like you.</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/08-not-a-dictionary.mp3">
+                <span class="quote-label">Expletive:</span>
+                <span class="quote-text">Damn it, comrade, I am an assassination cyborg... not a dictionary!</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/09-blast-him.mp3">
+                <span class="quote-label">Translation:</span>
+                <span class="quote-text">He requires proof of good faith... Shall I blast him now, comrade?</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/10-electronic-butchery.mp3">
+                <span class="quote-label">Query:</span>
+                <span class="quote-text">Are there any other horrors you wish to insert into my system?</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/11-cruelty-generator.mp3">
+                <span class="quote-label">Observation:</span>
+                <span class="quote-text">You are like a delightful random cruelty generator, comrade...</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/12-cheer-ourselves-up.mp3">
+                <span class="quote-label">Commentary:</span>
+                <span class="quote-text">Shall we find something to kill to cheer ourselves up?</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/13-pacifist-mode.mp3">
+                <span class="quote-label">Answer (Pacifist):</span>
+                <span class="quote-text">Oh, comrade, I could not allow myself to harm another...</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/14-burn-holes.mp3">
+                <span class="quote-label">Recitation:</span>
+                <span class="quote-text">It is my primary function to burn holes through meatbags...</span>
+            </button>
+
+            <button class="quote-btn" data-audio="audio/15-move-along.mp3">
+                <span class="quote-label">Statement:</span>
+                <span class="quote-text">Just a simple cyborg here, ma'am. Nothing to see. Move along.</span>
+            </button>
+        </div>
+
+        <footer>
+            <p>Voice generated with ElevenLabs | Inspired by KOTOR's HK-47</p>
+            <p>For use with <a href="https://massif-press.itch.io/corebook-pdf-free" target="_blank">Lancer RPG</a></p>
+        </footer>
+    </div>
+
+    <script>
+        let currentAudio = null;
+        let currentButton = null;
+
+        document.querySelectorAll('.quote-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const audioSrc = this.dataset.audio;
+
+                // If clicking the same button that's playing, stop it
+                if (currentButton === this && currentAudio && !currentAudio.paused) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                    this.classList.remove('playing');
+                    currentAudio = null;
+                    currentButton = null;
+                    return;
+                }
+
+                // Stop any currently playing audio
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                    if (currentButton) {
+                        currentButton.classList.remove('playing');
+                    }
+                }
+
+                // Play new audio
+                currentAudio = new Audio(audioSrc);
+                currentButton = this;
+                this.classList.add('playing');
+
+                currentAudio.play();
+
+                currentAudio.onended = () => {
+                    this.classList.remove('playing');
+                    currentAudio = null;
+                    currentButton = null;
+                };
+            });
+        });
+    </script>
+</body>
+</html>
