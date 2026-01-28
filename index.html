@@ -7,126 +7,220 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>HK-4792 Soundboard</title>
     <style>
+        /* COMP/CON Inspired Theme */
+        :root {
+            /* Core Colors */
+            --cc-background: #263237;
+            --cc-panel: #293940;
+            --cc-light-panel: #2e3e45;
+            --cc-stark-panel: #131b1f;
+
+            /* Accent Colors */
+            --cc-primary: #146464;
+            --cc-active: #218a8a;
+            --cc-accent: #1dc2c2;
+            --cc-secondary: #d98f30;
+
+            /* Status Colors */
+            --cc-success: #00C853;
+            --cc-warning: #FFAB00;
+            --cc-error: #F50057;
+            --cc-info: #569BEA;
+
+            /* Text Colors */
+            --cc-text: #EDEDED;
+            --cc-text-dim: #9E9E9E;
+            --cc-text-subtle: #6E7A7F;
+
+            /* Role/Type Colors */
+            --cc-npc-feature: #991E2A;
+            --cc-action-full: #283593;
+            --cc-action-quick: #3949AB;
+        }
+
+        @font-face {
+            font-family: 'CC-Title';
+            src: local('Helvetica Neue Bold'), local('Helvetica Bold'), local('Arial Bold');
+            font-weight: bold;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 100%);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--cc-background);
             min-height: 100vh;
             padding: 12px;
             padding-bottom: 30px;
-            color: #fff;
+            color: var(--cc-text);
         }
+
         .header {
             text-align: center;
-            padding: 15px 0 20px;
+            padding: 20px 0 24px;
             position: sticky;
             top: 0;
-            background: linear-gradient(180deg, #0d0d1a 0%, rgba(13,13,26,0.95) 100%);
+            background: var(--cc-background);
             z-index: 100;
             margin: -12px -12px 15px;
-            padding: 15px 12px 12px;
+            padding: 20px 12px 16px;
+            border-bottom: 2px solid var(--cc-accent);
         }
+
         h1 {
-            font-size: 1.5em;
-            color: #e94560;
-            text-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
-            letter-spacing: 2px;
-            margin-bottom: 4px;
+            font-family: 'CC-Title', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.6em;
+            font-weight: 900;
+            color: var(--cc-accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
+
         .subtitle {
-            color: #00ff88;
-            font-size: 0.75em;
-            opacity: 0.8;
+            color: var(--cc-secondary);
+            font-size: 0.7em;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
+
         .soundboard {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
+
         .quote-row {
             display: flex;
             align-items: stretch;
-            background: linear-gradient(145deg, #1a1a2e, #252540);
-            border: 1px solid #333;
-            border-radius: 12px;
+            background: var(--cc-panel);
+            border-left: 3px solid var(--cc-primary);
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
         }
+
+        .quote-row:hover {
+            background: var(--cc-light-panel);
+            border-left-color: var(--cc-active);
+        }
+
         .quote-row:active {
-            transform: scale(0.98);
-            border-color: #e94560;
+            transform: scale(0.995);
+            border-left-color: var(--cc-accent);
         }
+
         .quote-row.playing {
-            border-color: #00ff88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            border-left-color: var(--cc-accent);
+            background: var(--cc-light-panel);
+            box-shadow: 0 0 20px rgba(29, 194, 194, 0.2);
         }
+
         .play-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            min-width: 60px;
-            background: linear-gradient(145deg, #e94560, #c73e54);
+            width: 56px;
+            min-width: 56px;
+            background: var(--cc-primary);
             border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
+
+        .play-btn:hover {
+            background: var(--cc-active);
+        }
+
         .play-btn:active {
-            background: linear-gradient(145deg, #c73e54, #a33347);
+            background: var(--cc-accent);
         }
+
         .quote-row.playing .play-btn {
-            background: linear-gradient(145deg, #00ff88, #00cc6a);
+            background: var(--cc-accent);
         }
+
         .play-icon {
             width: 0;
             height: 0;
-            border-left: 14px solid #fff;
-            border-top: 9px solid transparent;
-            border-bottom: 9px solid transparent;
-            margin-left: 4px;
+            border-left: 12px solid var(--cc-text);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            margin-left: 3px;
+            opacity: 0.9;
         }
+
         .quote-row.playing .play-icon {
             border-left: none;
-            width: 16px;
-            height: 16px;
-            background: #fff;
-            border-radius: 2px;
+            width: 14px;
+            height: 14px;
+            background: var(--cc-stark-panel);
             margin-left: 0;
         }
+
         .quote-content {
             flex: 1;
-            padding: 12px 14px;
+            padding: 12px 16px;
             cursor: pointer;
         }
+
         .quote-label {
-            color: #00ff88;
-            font-weight: 600;
-            font-size: 0.7em;
+            color: var(--cc-secondary);
+            font-weight: 700;
+            font-size: 0.65em;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-bottom: 4px;
         }
+
         .quote-text {
-            color: #e0e0e0;
-            font-size: 0.9em;
-            line-height: 1.4;
+            color: var(--cc-text);
+            font-size: 0.85em;
+            line-height: 1.45;
+            font-weight: 300;
         }
+
         footer {
             text-align: center;
-            margin-top: 25px;
-            padding: 15px;
-            color: #555;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--cc-text-subtle);
             font-size: 0.7em;
-            border-top: 1px solid #222;
+            border-top: 1px solid var(--cc-primary);
+            letter-spacing: 1px;
         }
+
         footer a {
-            color: #e94560;
+            color: var(--cc-accent);
             text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        footer a:hover {
+            color: var(--cc-secondary);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cc-stark-panel);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--cc-primary);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cc-active);
         }
     </style>
 </head>
