@@ -7,35 +7,31 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>HK-4792 Soundboard</title>
     <style>
-        /* COMP/CON Inspired Theme */
+        /* COMP/CON GMS Light Theme */
         :root {
-            /* Core Colors */
-            --cc-background: #263237;
-            --cc-panel: #293940;
-            --cc-light-panel: #2e3e45;
-            --cc-stark-panel: #131b1f;
+            /* Core Colors - GMS Light */
+            --cc-background: #EDEDED;
+            --cc-panel: #FFFFFF;
+            --cc-light-panel: #F5F5F5;
+            --cc-border: #CCCCCC;
 
-            /* Accent Colors */
-            --cc-primary: #146464;
-            --cc-active: #218a8a;
-            --cc-accent: #1dc2c2;
-            --cc-secondary: #d98f30;
+            /* Red Accent Colors - GMS Signature */
+            --cc-primary: #991E2A;
+            --cc-active: #d93f4e;
+            --cc-accent: #8c1420;
+
+            /* Secondary */
+            --cc-secondary: #283593;
 
             /* Status Colors */
             --cc-success: #00C853;
             --cc-warning: #FFAB00;
-            --cc-error: #F50057;
-            --cc-info: #569BEA;
+            --cc-error: #F44336;
 
             /* Text Colors */
-            --cc-text: #EDEDED;
-            --cc-text-dim: #9E9E9E;
-            --cc-text-subtle: #6E7A7F;
-
-            /* Role/Type Colors */
-            --cc-npc-feature: #991E2A;
-            --cc-action-full: #283593;
-            --cc-action-quick: #3949AB;
+            --cc-text: #212121;
+            --cc-text-dim: #424242;
+            --cc-text-subtle: #9E9E9E;
         }
 
         @font-face {
@@ -69,21 +65,21 @@
             z-index: 100;
             margin: -12px -12px 15px;
             padding: 20px 12px 16px;
-            border-bottom: 2px solid var(--cc-accent);
+            border-bottom: 3px solid var(--cc-primary);
         }
 
         h1 {
             font-family: 'CC-Title', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 1.6em;
             font-weight: 900;
-            color: var(--cc-accent);
+            color: var(--cc-primary);
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 6px;
         }
 
         .subtitle {
-            color: var(--cc-secondary);
+            color: var(--cc-text-dim);
             font-size: 0.7em;
             font-weight: 600;
             letter-spacing: 2px;
@@ -100,7 +96,8 @@
             display: flex;
             align-items: stretch;
             background: var(--cc-panel);
-            border-left: 3px solid var(--cc-primary);
+            border: 1px solid var(--cc-border);
+            border-left: 4px solid var(--cc-primary);
             overflow: hidden;
             transition: all 0.15s ease;
             clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
@@ -109,6 +106,7 @@
         .quote-row:hover {
             background: var(--cc-light-panel);
             border-left-color: var(--cc-active);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .quote-row:active {
@@ -117,9 +115,9 @@
         }
 
         .quote-row.playing {
-            border-left-color: var(--cc-accent);
+            border-left-color: var(--cc-active);
             background: var(--cc-light-panel);
-            box-shadow: 0 0 20px rgba(29, 194, 194, 0.2);
+            box-shadow: 0 0 15px rgba(153, 30, 42, 0.2);
         }
 
         .play-btn {
@@ -143,24 +141,23 @@
         }
 
         .quote-row.playing .play-btn {
-            background: var(--cc-accent);
+            background: var(--cc-active);
         }
 
         .play-icon {
             width: 0;
             height: 0;
-            border-left: 12px solid var(--cc-text);
+            border-left: 12px solid #FFFFFF;
             border-top: 8px solid transparent;
             border-bottom: 8px solid transparent;
             margin-left: 3px;
-            opacity: 0.9;
         }
 
         .quote-row.playing .play-icon {
             border-left: none;
             width: 14px;
             height: 14px;
-            background: var(--cc-stark-panel);
+            background: #FFFFFF;
             margin-left: 0;
         }
 
@@ -171,7 +168,7 @@
         }
 
         .quote-label {
-            color: var(--cc-secondary);
+            color: var(--cc-primary);
             font-weight: 700;
             font-size: 0.65em;
             text-transform: uppercase;
@@ -183,7 +180,7 @@
             color: var(--cc-text);
             font-size: 0.85em;
             line-height: 1.45;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         footer {
@@ -192,18 +189,18 @@
             padding: 20px;
             color: var(--cc-text-subtle);
             font-size: 0.7em;
-            border-top: 1px solid var(--cc-primary);
+            border-top: 2px solid var(--cc-primary);
             letter-spacing: 1px;
         }
 
         footer a {
-            color: var(--cc-accent);
+            color: var(--cc-primary);
             text-decoration: none;
             transition: color 0.15s ease;
         }
 
         footer a:hover {
-            color: var(--cc-secondary);
+            color: var(--cc-active);
         }
 
         /* Scrollbar styling */
@@ -212,7 +209,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--cc-stark-panel);
+            background: var(--cc-light-panel);
         }
 
         ::-webkit-scrollbar-thumb {
